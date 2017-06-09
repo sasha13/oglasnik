@@ -1,0 +1,151 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: 'robotoregular';
+	src: url('../fonts/roboto-regular.woff') format('woff'), url('../fonts/roboto-regular.woff2') format('woff2');
+}
+
+body {
+	font-family: 'Arial', sans-serif;
+	font-size: 16px;
+}
+
+h1 {
+	margin-bottom: 30px;
+	text-transform: uppercase;
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+ul {
+	margin-bottom: 20px;
+	list-style: none;
+}
+
+a {
+	color: #000;
+}
+
+button {
+	font-size: 16px;
+	padding: 15px;
+	background: #ddd;
+	color: #000;
+	border: 2px solid #000;
+}
+
+nav {
+	display: flex;
+	width: 100%;
+}
+
+nav ul {
+	display: flex;
+	margin-bottom: 0;
+	align-items: center;
+	flex: 1;
+}
+
+nav ul li {
+	flex: 1;
+	text-align: center;
+}
+
+nav ul li a {
+	margin: 0 5px;
+}
+
+.site-wrapper {
+	min-height: 100vh;
+	background: #ccc;
+	display: flex;
+	flex-direction: column;
+}
+
+.site-header,
+.site-footer {
+	background: #ccc;
+	padding: 15px;
+}
+
+.site-header {
+	display: flex;
+	justify-content: center;
+}
+
+.site-footer {
+	text-align: center;
+}
+
+.site-footer p {
+	margin-bottom: 0;
+}
+
+.site-logo {
+	display: flex;
+}
+
+.site-content {
+	display: flex;
+	flex: 1;
+	background: #999;
+	color: #000;
+}
+
+.site-columns {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.site-main {
+	flex: 1;
+	background: #eee;
+	padding: 15px;
+}
+
+.container {
+	position: relative;
+	max-width: 1200px;
+	margin: 30px auto;
+}
+
+.home h1 {
+	text-align: center;
+}
+
+form label {
+	font-size: 14px;
+	margin-bottom: 3px;
+	display: block;
+}
+
+form input, form textarea {
+	display: block;
+	padding: 8px 5px;
+	border: 1px solid #ccc;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+input[type="submit"] {
+	font-size: 22px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border: 1px solid rgba(153, 153, 153, 0.5);
+	cursor: pointer;
+}
+
+.warning {
+	color: red;
+}
