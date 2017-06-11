@@ -1,20 +1,4 @@
-<?php
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "root";
-    $dbname = "ovde ubaciti ime baze";
-
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-    catch(PDOException $e)
-    {
-        echo $e->getMessage();
-    }
-?>
-
+<?php include 'db.php'; ?>
 <?php include 'header.php'; ?>
     <section class="site-content">
         <div class="site-columns">
@@ -23,33 +7,55 @@
                     <h1>Ads</h1>
 
 					<?php
+                        // pripremamo upit
+                        $getAllAdsQuery = "SELECT * FROM ads ORDER BY id DESC";
+                        $statement = $conn->prepare($getAllAdsQuery);
 
-                        // Prepare statement
-                        $sql = "SELECT * FROM ads";
-                        $statement = $conn->prepare($sql);
-
-                        // execute statement
+                        // izvrsavamo upit
                         $statement->execute();
 
-                        // set the resulting array to associative
+                        // zelimo da se rezultat vrati kao asocijativni niz.
+                        // ukoliko izostavimo ovu liniju, vratice nam se obican, numerisan niz
                         $statement->setFetchMode(PDO::FETCH_ASSOC);
 
-                        // gets data from DB
-                        $ads = $statement->fetchAll();
+                        // punimo promenjivu sa rezultatom upita
+                        $allAds = $statement->fetchAll();
 
-                        // uncomment to see if it works
-                        //var_dump($ads);
+                        // iteriramo po nizu oglasa
+                        foreach ($allAds as $ad) {
+                    ?>
 
+                        <!-- za svaki oglas na strani prikazujemo title i text -->
+                        <!-- obe stvari su klikabilne i vode na stranu pojedinacnog oglasa -->
+                        <!-- link je kreiran uz pomoc query parametra (?id=) -->
+                        <a href="ad.php?id=<?php echo $ad['id'] ?>">
+                            <h3><?php echo $ad['title'] ?></h3>
+                            <p><?php echo $ad['text'] ?></p>
+                        </a>
 
-                        // Display all ads - title and first 100 characters of text
-                        // Make title and text clickable - click takes you to the single ad page
+                        <!-- edit i delete link pravimo sa 'id' parametrom koji jednoznacno odredjuje oglas -->
+                        <!-- taj parametar u url-u mozemo procitati iz $_GET promenjive kada 'sletimo' na stranu iz linka -->
+                        <a href="ad-edit.php?id=<?php echo $ad['id'] ?>">Edit</a>
+                        <a href="?delete_id=<?php echo $ad['id'] ?>">Delete</a>
 
-                        // Below every ad, add a delete link
+                        <br />
+                        <br />
 
-                        // Also, add an edit link with a query parameter
-                        // which should redirect to edit ad page
+                    <?php } ?>
 
-					?>
+                    <?php
+                        // zbog ovog isset() uslova ovaj deo koda ce se izvrsiti samo kada se klikne na 'Delete' dugme.
+                        if (isset($_GET['delete_id'])) {
+                            $adToBeDeletedId = $_GET['delete_id'];
+
+                            $deleteSingleQuery = "DELETE FROM ads WHERE id = $adToBeDeletedId";
+                            $statement = $conn->prepare($deleteSingleQuery);
+
+                            $statement->execute();
+
+                            header('Location: ads.php');
+                        }
+                    ?>
 
                 </div>
             </main>
