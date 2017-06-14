@@ -14,6 +14,7 @@
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="ad-create.php">Create</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                 </ul>
             </nav>
         </header>

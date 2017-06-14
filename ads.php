@@ -1,4 +1,5 @@
-<?php include 'db.php'; ?>
+
+<?php include 'session.php'; ?>
 <?php include 'header.php'; ?>
     <section class="site-content">
         <div class="site-columns">
